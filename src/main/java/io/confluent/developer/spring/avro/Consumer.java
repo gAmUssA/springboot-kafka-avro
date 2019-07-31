@@ -9,7 +9,7 @@ import io.confluent.developer.User;
 import lombok.extern.apachecommons.CommonsLog;
 
 @Service
-@CommonsLog
+@CommonsLog(topic = "Consumer Logger")
 public class Consumer {
 
   @Value("${topic.name}")

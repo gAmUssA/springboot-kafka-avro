@@ -1,0 +1,36 @@
+topic:
+  name: users
+  partitions-num: 6
+  replication-factor: 3
+server:
+  port: 9080
+spring:
+  kafka:
+    bootstrap-servers:
+      - mybootstrap.confluent.cloud:9092  # <1>
+    properties:
+      # CCloud broker connection parameters 
+      ssl.endpoint.identification.algorithm: https
+      sasl.mechanism: PLAIN
+      request.timeout.ms: 20000
+      retry.backoff.ms: 500
+      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="ccloud_key" password="ccloud_secret";  # <2>
+      security.protocol: SASL_SSL
+
+      # CCloud Schema Registry Connection parameter
+      schema.registry.url: https://schema-registry.aws.confluent.cloud  # <3>
+      basic.auth.credentials.source: USER_INFO  # <4>
+      schema.registry.basic.auth.user.info: sr_ccloud_key:sr_ccloud_key # <5>
+    consumer:
+      group-id: group_id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    template:
+      default-topic:
+logging:
+  level:
+    root: info
