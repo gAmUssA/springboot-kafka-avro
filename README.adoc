@@ -57,5 +57,8 @@ cf start spring-kafka-avro
 .test
 ----
 curl -X POST -d 'name=vik&age=33' spring-kafka-avro-sleepy-dugong.apps.sanaa.cf-app.com/user/publish
+
+kafka-avro-console-consumer --bootstrap-server kafka.supergloo.com:9092 --consumer.config kafka.properties --topic users --from-beginning --property schema.registry.url=http://schemaregistry.supergloo.com:8081
 ----
+
 
