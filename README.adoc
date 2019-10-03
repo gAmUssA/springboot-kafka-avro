@@ -1,0 +1,61 @@
+= Document Title
+Viktor Gamov <viktor@confluent.io>, © 2019 Confluent, Inc.
+2019-10-03
+:revdate: 2019-10-03 15:17:56 -0600
+:linkattrs:
+:ast: &ast;
+:y: &#10003;
+:n: &#10008;
+:y: icon:check-sign[role="green"]
+:n: icon:check-minus[role="red"]
+:c: icon:file-text-alt[role="blue"]
+:toc: auto
+:toc-placement: auto
+:toc-position: auto
+:toc-title: Table of content
+:toclevels: 3
+:idprefix:
+:idseparator: -
+:sectanchors:
+:icons: font
+:source-highlighter: highlight.js
+:highlightjs-theme: idea
+:experimental:
+
+Spring Boot, spring-kafka and Confluent Schema Registry integration example
+
+toc::[]
+
+== Local and CCloud 
+
+https://www.confluent.io/blog/schema-registry-avro-in-spring-boot-application-tutorial[Read here]
+
+== Deploy app to PAS
+
+[source,json]
+----
+include::kafka.json[]
+----
+
+[source,shell]
+.filename
+----
+./mvnw clean install -DskipTests=true
+
+cf create-user-provided-service cp -p kafka.json
+
+cf push --no-start
+
+cf bind-service spring-kafka-avro cp
+
+cf start spring-kafka-avro
+----
+
+=== Test the app
+
+[source]
+.test
+----
+curl -X POST -d 'name=vik&age=33' spring-kafka-avro-sleepy-dugong.apps.sanaa.cf-app.com/user/publish
+----
+

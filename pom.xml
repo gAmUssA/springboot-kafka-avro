@@ -58,6 +58,11 @@
             <artifactId>kafka-avro-serializer</artifactId>  <!-- <3> -->
             <version>5.3.0</version>
         </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>monitoring-interceptors</artifactId>
+            <version>5.3.0</version>
+        </dependency>
     </dependencies>
 
     <build>

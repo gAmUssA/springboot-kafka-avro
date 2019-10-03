@@ -2,26 +2,24 @@ topic:
   name: users
   partitions-num: 3
   replication-factor: 1
-server:
-  port: 9080
 spring:
   kafka:
-    bootstrap-servers:
-      - localhost:9092
+    bootstrap-servers: "${vcap.services.cp.credentials.brokers}"
     properties:
-      schema.registry.url: http://localhost:8081
+      schema.registry.url: "${vcap.services.cp.credentials.sr}"
+      security.protocol: SASL_PLAINTEXT
+      sasl.mechanism: PLAIN
+      sasl.jaas.config: "${vcap.services.cp.credentials.jaasconfig}"
+      request.timeout.ms: 20000
+      retry.backoff.ms: 500
     consumer:
       group-id: group_id
       auto-offset-reset: latest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-      properties:
-        interceptor.classes: io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-      properties:
-        interceptor.classes: io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor
     template:
       default-topic:
 logging:

@@ -1,0 +1,5 @@
+{
+  "brokers": "kafka.supergloo.com:9092",
+  "jaasconfig": "org.apache.kafka.common.security.plain.PlainLoginModule required username='test' password='test123';",
+  "sr": "http://schemaregistry.supergloo.com:8081"
+}
