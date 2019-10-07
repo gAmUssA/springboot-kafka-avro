@@ -1,4 +1,4 @@
-= Document Title
+= Spring Kafka Avro 
 Viktor Gamov <viktor@confluent.io>, © 2019 Confluent, Inc.
 2019-10-03
 :revdate: 2019-10-03 15:17:56 -0600
