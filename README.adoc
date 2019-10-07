@@ -51,6 +51,18 @@ cf bind-service spring-kafka-avro cp
 cf start spring-kafka-avro
 ----
 
+=== Kafka Streams example
+
+The jar is containing two application - a webservice that produces data, and filtering processor (based on SpringCloud Streams and Kafka Streams).
+They use separate runners.
+An https://docs.cloudfoundry.org/devguide/multiple-processes.html[CF experimental API] should be used.
+There are two commands defined in In `Procfile`.
+
+[source]
+----
+include::Procfile[]
+----
+
 === Test the app
 
 [source]
@@ -60,5 +72,3 @@ curl -X POST -d 'name=vik&age=33' spring-kafka-avro-sleepy-dugong.apps.sanaa.cf-
 
 kafka-avro-console-consumer --bootstrap-server kafka.supergloo.com:9092 --consumer.config kafka.properties --topic users --from-beginning --property schema.registry.url=http://schemaregistry.supergloo.com:8081
 ----
-
-

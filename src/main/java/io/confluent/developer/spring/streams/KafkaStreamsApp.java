@@ -15,6 +15,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
 import io.confluent.developer.User;
+import lombok.extern.apachecommons.CommonsLog;
 
 import static io.confluent.developer.spring.streams.Bindings.USERS;
 import static io.confluent.developer.spring.streams.Bindings.USERS_FILTERED;
@@ -60,11 +61,15 @@ interface Bindings {
 }
 
 @Component
+@CommonsLog(topic = "Streams Logger")
 class UserProcessor {
 
   @StreamListener
   @SendTo(USERS_FILTERED)
   KStream<String, User> processUsers(@Input(USERS) KStream<String, User> inputStream) {
-    return inputStream.filter((s, user) -> user.getAge() < 40);
+    return inputStream
+        .filter((key, user) -> user.getAge() < 40)
+        .mapValues(user -> new User(user.getName().toUpperCase(), user.getAge()))
+        .peek((key, user) -> log.info("New entry in filtered stream => Key = " + key + " Value = " + user));
   }
 }

@@ -23,7 +23,7 @@ public class SpringAvroApplication {
   }
 
   @Bean
-  NewTopic moviesTopic() {
+  NewTopic newTopic() {
     return new NewTopic(topicName, partitions, replicationFactor);
   }
 }

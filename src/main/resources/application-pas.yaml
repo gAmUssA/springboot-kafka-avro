@@ -1,7 +1,9 @@
 topic:
   name: users
-  partitions-num: 3
-  replication-factor: 1
+  partitions-num: 6
+  replication-factor: 3
+server:
+  port: 9080
 spring:
   kafka:
     bootstrap-servers: "${vcap.services.cp.credentials.brokers}"
