@@ -1,2 +1,0 @@
-web: java -cp target/kafka-avro-0.0.1-SNAPSHOT.jar -Dloader.main=io.confluent.developer.spring.avro.SpringAvroApplication org.springframework.boot.loader.PropertiesLauncher  
-worker:  java -cp target/kafka-avro-0.0.1-SNAPSHOT.jar -Dloader.main=io.confluent.developer.spring.streams.KafkaStreamsApp org.springframework.boot.loader.PropertiesLauncher

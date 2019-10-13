@@ -1,9 +1,25 @@
----
 applications:
   - name: spring-kafka-avro
-    path: target/kafka-avro-0.0.1-SNAPSHOT.jar
-    memory: 2G
     instances: 1
     random-route: true
+    buildpacks:
+      - https://github.com/cloudfoundry/java-buildpack
+    path: target/kafka-avro-0.0.1-SNAPSHOT.jar
+    memory: 1G
+    services:
+      - cp
+    JAVA_OPTS: '-Dloader.main=io.confluent.developer.spring.avro.SpringAvroApplication'
+    JBP_CONFIG_JAVA_MAIN: '{java_main_class: org.springframework.boot.loader.PropertiesLauncher}' 
+  - name: spring-kafka-streams
+    instances: 1
+    no-route: true
+    buildpacks:
+      - https://github.com/cloudfoundry/java-buildpack
+    path: target/kafka-avro-0.0.1-SNAPSHOT.jar
+    memory: 1G
+    services:
+      - cp
     env:
-      SPRING_PROFILES_ACTIVE: paas
+      SPRING_PROFILES_ACTIVE: pas
+      JAVA_OPTS: '-Dloader.main=io.confluent.developer.spring.streams.KafkaStreamsApp'
+      JBP_CONFIG_JAVA_MAIN: '{java_main_class: org.springframework.boot.loader.PropertiesLauncher}'
