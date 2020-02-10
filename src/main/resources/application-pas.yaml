@@ -6,8 +6,8 @@ server:
   port: 9080
 spring:
   kafka:
-    bootstrap-servers: "${vcap.services.cp.credentials.brokers}"
     properties:
+      bootstrap.servers: "${vcap.services.cp.credentials.brokers}"
       schema.registry.url: "${vcap.services.cp.credentials.sr}"
       security.protocol: SASL_PLAINTEXT
       sasl.mechanism: PLAIN

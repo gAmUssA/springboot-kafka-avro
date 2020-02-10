@@ -1,6 +1,5 @@
-package io.confluent.developer.spring.avro;
+package io.confluent.developer.kafkaworkshop.avro;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +10,10 @@ import lombok.extern.apachecommons.CommonsLog;
 @CommonsLog(topic = "Consumer Logger")
 public class Consumer {
 
-  @Value("${topic.name}")
-  private String topicName;
-
-  @KafkaListener(topics = "users", groupId = "group_id")
+  @KafkaListener(
+      topics = "#{'${topic.name}'}",
+      groupId = "simple-consumer"
+  )
   public void consume(User record) {
     log.info(String.format("Consumed message -> %s", record));
   }

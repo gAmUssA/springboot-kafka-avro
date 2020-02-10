@@ -1,1 +1,1 @@
-./mvnw install -DskipTests=true && cf push
+./mvnw verify -DskipTests=true && cf push

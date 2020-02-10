@@ -1,4 +1,4 @@
-package io.confluent.developer.spring.streams;
+package io.confluent.developer.kafkaworkshop.streams;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.streams.kstream.KStream;
@@ -17,9 +17,8 @@ import org.springframework.stereotype.Component;
 import io.confluent.developer.User;
 import lombok.extern.apachecommons.CommonsLog;
 
-import static io.confluent.developer.spring.streams.Bindings.USERS;
-import static io.confluent.developer.spring.streams.Bindings.USERS_FILTERED;
-
+import static io.confluent.developer.kafkaworkshop.streams.Bindings.USERS;
+import static io.confluent.developer.kafkaworkshop.streams.Bindings.USERS_FILTERED;
 
 @EnableBinding(Bindings.class)
 @SpringBootApplication

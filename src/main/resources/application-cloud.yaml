@@ -6,10 +6,9 @@ server:
   port: 9080
 spring:
   kafka:
-    bootstrap-servers:
-      - mybootstrap.confluent.cloud:9092  # <1>
     properties:
-      # CCloud broker connection parameters 
+      # CCloud broker connection parameters
+      bootstrap.servers: mybootstrap.confluent.cloud:9092  # <1>
       ssl.endpoint.identification.algorithm: https
       sasl.mechanism: PLAIN
       request.timeout.ms: 20000
@@ -36,7 +35,7 @@ spring:
 logging:
   level:
     root: info
-    
+
 # spring cloud streams    
 spring.cloud.stream.kafka.streams.binder.configuration.commit.interval.ms: 1000
 spring.cloud.stream.kafka.streams:

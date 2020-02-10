@@ -26,6 +26,10 @@ Spring Boot, spring-kafka and Confluent Schema Registry integration example
 
 toc::[]
 
+== The playbook 
+
+You can find the most recent playbook doc https://gamov.io/workshop/cnfl-pivotal-nyc-2020.html[here] 
+
 == Local and CCloud 
 
 https://www.confluent.io/blog/schema-registry-avro-in-spring-boot-application-tutorial[Read here]
@@ -40,7 +44,7 @@ include::kafka.json[]
 [source,shell]
 .filename
 ----
-./mvnw clean install -DskipTests=true
+./mvnw verify -DskipTests=true
 
 cf create-user-provided-service cp -p kafka.json
 
@@ -55,13 +59,6 @@ cf start spring-kafka-avro
 
 The jar is containing two application - a webservice that produces data, and filtering processor (based on SpringCloud Streams and Kafka Streams).
 They use separate runners.
-An https://docs.cloudfoundry.org/devguide/multiple-processes.html[CF experimental API] should be used.
-There are two commands defined in In `Procfile`.
-
-[source]
-----
-include::Procfile[]
-----
 
 === Test the app
 
