@@ -1,6 +1,6 @@
 # This profile will be used in CF environment 
 topic:
-  name: viktor-users
+  name: users
   partitions-num: 6
   replication-factor: 3
 server:
