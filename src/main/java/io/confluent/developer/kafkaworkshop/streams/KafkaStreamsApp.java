@@ -37,7 +37,9 @@ public class KafkaStreamsApp {
   public static void main(String[] args) {
     final SpringApplication application = new SpringApplication(KafkaStreamsApp.class);
     // we don't need web/rest interface in this app 
-    application.setWebApplicationType(WebApplicationType.NONE);
+    // but CF has default health check that will hit http port
+    // https://docs.cloudfoundry.org/devguide/deploy-apps/healthchecks.html#understand-healthchecks
+    application.setWebApplicationType(WebApplicationType.SERVLET);
     application.run(args);
   }
 

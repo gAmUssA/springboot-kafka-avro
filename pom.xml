@@ -18,7 +18,7 @@
         <java.version>1.8</java.version>
         <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
         <!-- The main class to start by executing "java -jar" -->
-        <start-class>io.confluent.developer.spring.avro.KafkaWorkshopApplication</start-class>
+        <start-class>io.confluent.developer.kafkaworkshop.avro.KafkaWorkshopApplication</start-class>
     </properties>
 
     <dependencies>
@@ -34,14 +34,18 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-stream</artifactId>
         </dependency>
+        <!-- NOTE: https://stackoverflow.com/questions/59677651/spring-cloud-stream-multi-binder-error-kstreambinderconfiguration-required-a-s -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-stream-binder-kafka</artifactId>
+            <version>3.0.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-stream-binder-kafka-streams</artifactId>
+            <version>3.0.0.RELEASE</version>
         </dependency>
+        <!-- end NOTE -->
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>

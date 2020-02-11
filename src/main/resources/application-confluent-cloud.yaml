@@ -1,5 +1,5 @@
 topic:
-  name: users
+  name: viktor-users
   partitions-num: 6
   replication-factor: 3
 server:
@@ -7,16 +7,22 @@ server:
 spring:
   kafka:
     properties:
-      bootstrap.servers: "${vcap.services.cp.credentials.brokers}"
-      schema.registry.url: "${vcap.services.cp.credentials.sr}"
-      security.protocol: SASL_PLAINTEXT
+      # CCloud broker connection parameters
+      bootstrap.servers: mybootstrap.confluent.cloud:9092  # <1>
+      ssl.endpoint.identification.algorithm: https
       sasl.mechanism: PLAIN
-      sasl.jaas.config: "${vcap.services.cp.credentials.jaasconfig}"
       request.timeout.ms: 20000
       retry.backoff.ms: 500
+      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="ccloud_key" password="ccloud_secret";  # <2>
+      security.protocol: SASL_SSL
+
+      # CCloud Schema Registry Connection parameter
+      schema.registry.url: https://schema-registry.aws.confluent.cloud  # <3>
+      basic.auth.credentials.source: USER_INFO  # <4>
+      schema.registry.basic.auth.user.info: sr_ccloud_key:sr_ccloud_key # <5>
     consumer:
       group-id: group_id
-      auto-offset-reset: latest
+      auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
       properties:
