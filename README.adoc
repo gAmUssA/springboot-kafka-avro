@@ -28,7 +28,7 @@ toc::[]
 
 == The playbook 
 
-You can find the most recent playbook doc https://gamov.io/workshop/cnfl-pivotal-nyc-2020.html[here] 
+You can find the most recent playbook doc https://gamov.io/workshop/cnfl-pivotal-ord-2020.html[here] 
 
 == Local and CCloud 
 
@@ -65,7 +65,7 @@ They use separate runners.
 [source]
 .test
 ----
-curl -X POST -d 'name=vik&age=33' spring-kafka-avro-sleepy-dugong.apps.sanaa.cf-app.com/user/publish
+curl -X POST -d 'name=vik&age=33' spring-kafka-avro-noisy-dingo-pq.apps.richmond.cf-app.com/user/publish
 
 kafka-avro-console-consumer --bootstrap-server kafka.santamaria.cf-app.com:9092 --consumer.config kafka.properties --topic users --from-beginning --property schema.registry.url=http://schemaregistry.santamaria.cf-app.com/
 ----

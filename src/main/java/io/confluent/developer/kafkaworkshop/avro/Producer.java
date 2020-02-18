@@ -17,7 +17,7 @@ public class Producer {
   private String TOPIC;
 
   private final KafkaTemplate<String, User> kafkaTemplate;
-  
+
   void sendMessage(User user) {
     this.kafkaTemplate.send(this.TOPIC, user.getName(), user);
     log.info(String.format("Produced user -> %s", user));
